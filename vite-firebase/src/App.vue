@@ -8,7 +8,7 @@ const userStor = userStore();
 
 <template>
   <div>
-    <nav v-if="!userStor.session">
+    <nav v-if="!userStor.session" id="nav">
       <ul>
         <li>
           <router-link v-if="userStor.userData" to="/">Home</router-link>

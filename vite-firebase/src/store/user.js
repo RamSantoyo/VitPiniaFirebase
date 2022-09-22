@@ -1,7 +1,10 @@
 import { defineStore } from 'pinia'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged} from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, 
+        signOut, onAuthStateChanged} from 'firebase/auth';
 import { auth } from '../firebase/firebaseconfig';
 import router from '../router/index';
+import { useBasedatosStore } from './basedatos';
+
 
 export const userStore = defineStore('usuario', {
     state: () => ({
@@ -37,10 +40,12 @@ export const userStore = defineStore('usuario', {
             }
         },
         async signOut() { // Cerrar sesión
+            const bd = useBasedatosStore();
+            bd.$reset();
             try {
                 await signOut(auth);
                 this.userData = null;
-                router.push('/login');
+                router.push('/login');                
             } catch (error) {
                 console.log(error);
             }

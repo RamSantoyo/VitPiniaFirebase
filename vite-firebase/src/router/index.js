@@ -13,6 +13,17 @@ const rutaprotegida = async(to, from, next) => {
   }userstor.session = false;
 }
 
+const rutabloqueada = async(to, from, next) => {
+  const userstor = userStore();
+  userstor.session = true;
+  const user = await userstor.detectUser();
+  if (!user) {
+    next();
+  } else {
+    next('/');
+  }userstor.session = false;
+}
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
 
@@ -25,12 +36,17 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: () => import('../views/Login.vue')
+      component: () => import('../views/Login.vue'), beforeEnter: rutabloqueada
     },
     {
       path: '/register',
       name: 'register',
-      component: () => import('../views/Register.vue')
+      component: () => import('../views/Register.vue'), beforeEnter: rutabloqueada
+    },
+    {
+      path: '/editar/:id',
+      name: 'editar',
+      component: () => import('../views/Editar.vue'), beforeEnter: rutaprotegida
     },
     {
       path: '/:pathMatch(.*)*',

@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore/lite";
 
 
 const firebaseConfig = {
@@ -14,6 +15,9 @@ const firebaseConfig = {
 // Initialize Firebase
 initializeApp(firebaseConfig);
 
+//iniciar base de datos
+const db = getFirestore();
+
 const auth = getAuth(); // para poder usar el auth y crear un usuario
 
-export { auth };
+export { auth, db};

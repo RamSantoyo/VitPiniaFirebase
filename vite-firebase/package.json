@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "bootstrap": "^5.2.1",
     "firebase": "^9.9.4",
     "nanoid": "^4.0.0",
     "pinia": "^2.0.22",

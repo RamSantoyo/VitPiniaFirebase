@@ -1,5 +1,5 @@
 <script setup>
-import { RouterLink, RouterView} from 'vue-router'
+import { RouterLink, RouterView } from 'vue-router'
 import { userStore } from './store/user'
 
 const userStor = userStore();
@@ -7,30 +7,229 @@ const userStor = userStore();
 </script>
 
 <template>
-  <div>
-    <nav v-if="!userStor.session" id="nav">
-      <ul>
-        <li>
-          <router-link v-if="userStor.userData" to="/">Home</router-link>
-        </li>
-        <li>
-          <router-link v-if="!userStor.userData" to="/login">Login</router-link>|
-        </li>
-        <li>
-          <router-link v-if="!userStor.userData" to="/register">Register</router-link>|
-        </li>
-      </ul>
-      <button v-if="userStor.userData" @click="userStor.signOut">Logout</button>
-    </nav>
-    <div v-else>
-      <p>Loading....</p>
-    </div>    
-  </div>
-  <div>
-      <router-view></router-view>
+  <!--Hey! This is the original version
+of Simple CSS Waves-->
+  <div class="header">
+    <header>
+      <div>
+        <nav v-if="!userStor.session">
+          <ul>            
+            <li>
+              <router-link v-if="!userStor.userData" to="/login" class="enlace">Login
+                <i class="fa-solid fa-user"></i>
+              </router-link>              
+            </li>
+            <li>
+              <router-link v-if="!userStor.userData" to="/register" class="enlace">Register
+                <i class="fa-solid fa-address-card"></i>
+              </router-link>              
+            </li>
+            <li >
+              <div class="salir">
+                <router-link v-if="userStor.userData" to="/" class="enlace">Home</router-link>
+                <button v-if="userStor.userData" @click="userStor.signOut" class="logut">Logout</button>
+              </div>              
+            </li>
+          </ul>
+          
+        </nav>
+        <div v-else>
+          <div class="spinner-grow" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!--Content before waves-->
+    <div class="inner-header flex">
+      <!--Just the logo.. Don't mind this-->
+      <div>
+        <router-view></router-view>
+      </div>
     </div>
+
+    <!--Waves Container-->
+    <div class="animation">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+          <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+          <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+          <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+        </g>
+      </svg>
+    </div>
+    <!--Waves end-->
+  </div>
+  <!--Header ends-->
+  <!--Content starts-->
+  <div class="content flex">
+
+  </div>
+  <!--Content ends-->
+
 </template>
 
 <style coped>
 
+.salir{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;  
+}
+
+body {
+  margin: 0;
+}
+
+.enlace{
+  color: white;
+  font-family: var(--fuente-principal);
+  text-decoration: none;
+  font-size: 1.5rem;
+  padding-right: 1rem;
+}
+
+.enlace:hover{
+  transition: all 0.3s ease-in-out;
+  margin-left: -.5rem;
+  color: #f1f1f1;
+}
+
+li{
+  display: inline;
+  margin-right: 1rem;
+}
+
+.link{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 3rem;
+}
+
+.logut{
+    display: block;
+    padding: .6rem 1rem;
+    border: .1rem solid rgb(84, 110, 255);
+    border-radius: 5px;
+    font-size: 1.2rem;
+    background-color: rgb(67, 95, 255);
+    color: white;
+    cursor: pointer;
+}
+
+.logut:hover{
+    transition: .3s;
+    background-color: white;
+    color: rgb(67, 95, 255);
+}
+
+.header {
+  position: relative;
+  text-align: center;
+  background: linear-gradient(60deg, rgba(84, 58, 183, 1) 0%, rgba(0, 172, 193, 1) 100%);
+  color: white;
+  margin: -1rem;
+}
+
+.logo {
+  width: 50px;
+  fill: white;
+  padding-right: 15px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.inner-header {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.flex {
+  /*Flexbox for containers*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.waves {
+  position: relative;
+  width: 100%;
+  height: 15vh;
+  margin-bottom: -7px;
+  /*Fix for safari gap*/
+  min-height: 100px;
+  max-height: 150px;
+}
+
+.content {
+  position: relative;
+  height: 20vh;
+  text-align: center;
+  background-color: white;
+}
+
+/* Animation */
+
+.parallax>use {
+  animation: move-forever 25s cubic-bezier(.55, .5, .45, .5) infinite;
+}
+
+.parallax>use:nth-child(1) {
+  animation-delay: -2s;
+  animation-duration: 7s;
+}
+
+.parallax>use:nth-child(2) {
+  animation-delay: -3s;
+  animation-duration: 10s;
+}
+
+.parallax>use:nth-child(3) {
+  animation-delay: -4s;
+  animation-duration: 13s;
+}
+
+.parallax>use:nth-child(4) {
+  animation-delay: -5s;
+  animation-duration: 20s;
+}
+
+@keyframes move-forever {
+  0% {
+    transform: translate3d(-90px, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(85px, 0, 0);
+  }
+}
+
+/*Shrinking for mobile*/
+@media (max-width: 768px) {
+  .waves {
+    height: 40px;
+    min-height: 40px;
+  }
+
+  .content {
+    height: 30vh;
+  }
+}
 </style>

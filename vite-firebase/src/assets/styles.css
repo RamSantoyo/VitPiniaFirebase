@@ -1,0 +1,10 @@
+@import url(//fonts.googleapis.com/css?family=Lato:300:400);
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap');
+
+:root {
+    /* Fuentes */
+    --fuente-principal: 'Quicksand', sans-serif;
+    --fuerte: 500;
+    --mediano: 400;
+    --delgado: 300;
+}

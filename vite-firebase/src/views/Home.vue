@@ -16,13 +16,10 @@ base.getbd()
         <div v-if="base.loading">
                 <p>Loading data....</p>
         </div>        
-        <div v-else>                         
-                <h1>Home</h1>
+        <div v-else> 
+                <h1>Registros</h1>                        
                 <formulario/>
-                <h2>Usuario</h2>
-                <p>{{userstor.userData?.email}}</p>
-                <p>{{userstor.userData?.uid}}</p>
-                <h2>Registros</h2>
+                
                 <div v-for="(item, index) in base.documents" :key="index">
                         <p>
                                 {{item.name}}<br>{{item.short}}<br>{{item.user}}   
@@ -35,5 +32,12 @@ base.getbd()
 </template>
 
 <style scoped>
+
+h1 {
+  font-family: var(--fuente-principal);
+  font-weight: var(--fuerte);
+  letter-spacing: .5rem;
+  font-size: 2rem;
+}
 
 </style>
